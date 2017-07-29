@@ -10,14 +10,6 @@ services:
      depends_on:
        - database
 
-  composer:
-    image: composer/composer:latest
-    env_file:
-    - secrets.env
-    volumes:
-    - ./public_html:/app
-    restart: always
-
 # GRANT ALL PRIVILEGES ON app_db.* TO 'app'@'webserver' IDENTIFIED BY 'app_pass' WITH GRANT OPTION; FLUSH PRIVILEGES;
   database:
     image: mysql:5.7
