@@ -1,0 +1,30 @@
+version: '2'
+services:
+  phpmyadmin:
+     image: phpmyadmin/phpmyadmin
+     env_file:
+     - secrets.default.env
+     ports:
+     - "8080:80"
+     restart: always
+     depends_on:
+       - database
+
+# GRANT ALL PRIVILEGES ON app_db.* TO 'app'@'webserver' IDENTIFIED BY 'app_pass' WITH GRANT OPTION; FLUSH PRIVILEGES;
+  database:
+    image: mysql:5.7
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    env_file:
+    - secrets.default.env
+    restart: always
+
+  webserver:
+    build : .
+    volumes:
+    - ./public_html:/var/www/html
+    ports:
+    - "80:80"
+    env_file:
+    - secrets.default.env
+    restart: always
