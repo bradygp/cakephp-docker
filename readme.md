@@ -19,3 +19,5 @@ You will need to copy the following file.
 Run composer on the application code
  - `cd public_html`
  - `docker run --rm -v $(pwd):/app composer/composer install --ignore-platform-reqs`
+
+Run `docker-compose up` and then head to the phpmyadmin dashboard on `http://localhost:8080`.
